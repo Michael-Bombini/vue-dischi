@@ -7,8 +7,8 @@
                 </div>
            </div>
         </div>
-        <select name="" id="">
-            <option value="" v-for="(disk,i) in genreList" :key="disk.genre + i">{{disk.genre}}</option>
+        <select name="" id="" v-model="currentGenre">
+            <option value="" v-for="disk in genreList" :key="disk.genre">{{disk}}</option>
         </select>
     </main>
 </template>
@@ -24,6 +24,7 @@ import TheDisk from "./TheDisk.vue";
         return {
             diskList: [],
             genreList: [],
+            currentGenre : "",
         };
     },
     methods: {
@@ -31,22 +32,22 @@ import TheDisk from "./TheDisk.vue";
             axios.get("https://flynn.boolean.careers/exercises/api/array/music")
                 .then((response) => {
                 this.diskList = response.data.response;
+                this.diskList.forEach(element => {
+                    if(!this.genreList.includes(element.genre)){
+                        this.genreList.push(element.genre);
+                    }
+                });
+                
             });
         },
         
-        getDifferentGenre() {
-            this.diskList.forEach(element => {
-                if(!this.genreList(element.genre))
-                this.genreList.push(element.genre);
-                
-            });
-    },
+     
             
         },
 
     mounted() {
         this.fetchDisk();
-        this.getDifferentGenre();
+     
     },
     components: { TheDisk }
 }
