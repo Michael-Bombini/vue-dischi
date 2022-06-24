@@ -2,9 +2,6 @@
 <header class="p-3">
     <nav class="">
         <img src="../../public/logo-small.svg" alt="" class="logo">
-        <select name="" id="">
-            <option value=""></option>
-        </select>
     </nav>
 </header>
 </template>

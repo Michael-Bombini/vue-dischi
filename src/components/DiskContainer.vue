@@ -7,6 +7,9 @@
                 </div>
            </div>
         </div>
+        <select name="" id="">
+            <option value="" v-for="(disk,i) in genreList" :key="disk.genre + i">{{disk.genre}}</option>
+        </select>
     </main>
 </template>
 
@@ -20,6 +23,7 @@ import TheDisk from "./TheDisk.vue";
     data() {
         return {
             diskList: [],
+            genreList: [],
         };
     },
     methods: {
@@ -28,10 +32,21 @@ import TheDisk from "./TheDisk.vue";
                 .then((response) => {
                 this.diskList = response.data.response;
             });
-        }
+        },
+        
+        getDifferentGenre() {
+            this.diskList.forEach(element => {
+                if(!this.genreList(element.genre))
+                this.genreList.push(element.genre);
+                
+            });
     },
+            
+        },
+
     mounted() {
         this.fetchDisk();
+        this.getDifferentGenre();
     },
     components: { TheDisk }
 }
@@ -42,5 +57,14 @@ main {
     background-color: #1E2D3B;
     height: 90vh;
     padding: 7rem 0;
+    position: relative;
+
+
+    select {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0.3rem 1.2rem;
+    }
 }
 </style>
