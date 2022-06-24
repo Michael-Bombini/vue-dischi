@@ -2,13 +2,13 @@
     <main class="flex-grow-1">
         <div class="container">
             <div class="row row-cols-5 g-4">
-                <div class="col" v-for="disk in diskList" :key="disk.title">
+                <div class="col" v-for="disk in diskList" :key="disk.title" :class="{'d-block' : currentGenre==='all' , 'd-none' : currentGenre!==disk.genre&&currentGenre!=='all' }">
                     <TheDisk :info="disk"/>
                 </div>
            </div>
         </div>
         <select name="" id="" v-model="currentGenre">
-            <option value="" v-for="disk in genreList" :key="disk.genre">{{disk}}</option>
+            <option :value="genre" v-for="genre in genreList" :key="genre.genre">{{genre}}</option>
         </select>
     </main>
 </template>
@@ -24,7 +24,7 @@ import TheDisk from "./TheDisk.vue";
         return {
             diskList: [],
             genreList: [],
-            currentGenre : "",
+            currentGenre : 'all',
         };
     },
     methods: {
