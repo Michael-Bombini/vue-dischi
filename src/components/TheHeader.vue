@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        
+        name : "TheHeader",
     }
 </script>
 
@@ -16,7 +16,7 @@
 
 header {
     background-color: #2E3A46;
-
+    height: 10vh;
 
 .logo {
     width: 60px;

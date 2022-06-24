@@ -1,16 +1,19 @@
 <template>
-  <div id="app">
+  <div id="app d-flex flex-column">
     <TheHeader/>
+    <DiskContainer/>
   </div>
 </template>
 
 <script>
 import TheHeader from './components/TheHeader.vue';
+import DiskContainer from './components/DiskContainer.vue';
 
 export default {
   name: 'App',
   components: {
-    TheHeader
+    TheHeader,
+    DiskContainer
 }
 }
 </script>
@@ -23,9 +26,7 @@ export default {
   box-sizing: border-box;
 }
 
-body {
-  height: 100vh;
-}
+
 
 
 
