@@ -2,13 +2,17 @@
     <main class="flex-grow-1">
         <div class="container">
             <div class="row row-cols-5 g-4">
-                <div class="col" v-for="disk in diskList" :key="disk.title" :class="{'d-block' : currentGenre==='all' , 'd-none' : currentGenre!==disk.genre&&currentGenre!=='all' }">
+                <div class="col" v-for="disk in diskList" :key="disk.title" :class="{'d-none' : currentGenre!==disk.genre&&currentGenre!=='all' || currentAuthor!==disk.author&&currentAuthor!=='all'  }">
                     <TheDisk :info="disk"/>
                 </div>
            </div>
         </div>
-        <select name="" id="" v-model="currentGenre">
-            <option :value="genre" v-for="genre in genreList" :key="genre.genre">{{genre}}</option>
+        <select class="genre" name="" id="" v-model="currentGenre">
+            <option :value="genre" v-for="genre in genreList" :key="genre">{{genre}}</option>
+        </select>
+
+         <select class="author" name="" id="" v-model="currentAuthor">
+            <option :value="author" v-for="author in authorList" :key="author">{{author}}</option>
         </select>
     </main>
 </template>
@@ -25,6 +29,8 @@ import TheDisk from "./TheDisk.vue";
             diskList: [],
             genreList: [],
             currentGenre : 'all',
+            authorList : [],
+            currentAuthor : 'all',
         };
     },
     methods: {
@@ -35,6 +41,9 @@ import TheDisk from "./TheDisk.vue";
                 this.diskList.forEach(element => {
                     if(!this.genreList.includes(element.genre)){
                         this.genreList.push(element.genre);
+                    }
+                      if(!this.authorList.includes(element.author)){
+                        this.authorList.push(element.author);
                     }
                 });
                 
@@ -61,11 +70,21 @@ main {
     position: relative;
 
 
-    select {
+    select{
         position: absolute;
         top: 0;
-        right: 0;
         padding: 0.3rem 1.2rem;
+    
+
+    &.genre{
+        right: 0;
     }
+
+    &.author {
+        left: 0;
+    }
+
+    }
+    
 }
 </style>
