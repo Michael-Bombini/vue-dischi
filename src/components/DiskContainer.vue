@@ -1,12 +1,11 @@
 <template>
     <main class="flex-grow-1">
-        <div class="container">
+        <div class="container"  v-if="loading">
             <div class="row row-cols-5 g-4">
                 <div class="col" v-for="disk in diskList" :key="disk.title" :class="{'d-none' : currentGenre!==disk.genre&&currentGenre!=='all' || currentAuthor!==disk.author&&currentAuthor!=='all'  }">
                     <TheDisk :info="disk"/>
                 </div>
            </div>
-        </div>
         <select class="genre" name="" id="" v-model="currentGenre">
             <option :value="genre" v-for="genre in genreList" :key="genre">{{genre}}</option>
         </select>
@@ -14,13 +13,16 @@
          <select class="author" name="" id="" v-model="currentAuthor">
             <option :value="author" v-for="author in authorList" :key="author">{{author}}</option>
         </select>
+        </div>
+        <LoadingCircle v-else/>
     </main>
 </template>
 
 <script>
 import axios from "axios";
 import TheDisk from "./TheDisk.vue";
-
+import { state } from '../store.js';
+import LoadingCircle from "./LoadingCircle.vue";
 
     export default {
     name: "DiskContainer",
@@ -47,18 +49,31 @@ import TheDisk from "./TheDisk.vue";
                     }
                 });
                 
+                setTimeout(function(){
+                    state.isLoading = true;
+                },4000);
+
             });
         },
+        
+
         
      
             
         },
+        
+computed : {
+    loading() {
+        return state.isLoading;
+        }
+    },
+
 
     mounted() {
         this.fetchDisk();
      
     },
-    components: { TheDisk }
+    components: { TheDisk, LoadingCircle }
 }
 </script>
 

@@ -9,12 +9,14 @@
 import TheHeader from './components/TheHeader.vue';
 import DiskContainer from './components/DiskContainer.vue';
 
+
 export default {
   name: 'App',
   components: {
     TheHeader,
     DiskContainer
-}
+},
+
 }
 </script>
 
